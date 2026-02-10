@@ -63,6 +63,15 @@ const formatCurrency = (value) => {
     }).format(value || 0);
 };
 
+const formatDurasi = (menit) => {
+    if (!menit || menit <= 0) return "-";
+    const jam = Math.floor(menit / 60);
+    const sisaMenit = menit % 60;
+    if (jam === 0) return `${sisaMenit} Menit`;
+    if (sisaMenit === 0) return `${jam} Jam`;
+    return `${jam} Jam ${sisaMenit} Menit`;
+};
+
 const RekapTransaksi = () => {
     const {
         currentPage,
@@ -152,7 +161,7 @@ const RekapTransaksi = () => {
             case "durasi":
                 return (
                     <p className="text-gray-700">
-                        {item.status === "keluar" ? `${item.durasi_jam} Jam` : "-"}
+                        {item.status === "keluar" ? formatDurasi(item.durasi_jam) : "-"}
                     </p>
                 );
 

@@ -54,7 +54,9 @@ const EditTarifModal = forwardRef(({ onSuccess }, ref) => {
                   <Input
                     {...field}
                     id="tarif_per_jam"
-                    placeholder="Masukkan Username"
+                    type="number"
+                    min="0"
+                    placeholder="Masukkan Tarif per Jam"
                     className={
                       error
                         ? "border-red-500 focus-visible:ring-red-500"

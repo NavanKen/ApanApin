@@ -38,7 +38,9 @@ const AktivitasController = {
 
       const [data, total] = await Promise.all([
         prisma.tb_log_aktivitas.findMany({
-          where,
+          where, orderBy: {
+            waktu_aktivitas: "desc",
+          },
           take: Number(limit),
           skip: (Number(page) - 1) * Number(limit),
         }),

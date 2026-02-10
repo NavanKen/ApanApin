@@ -16,8 +16,16 @@ import useAktivitas from "./useAktivitas";
 
 const COLUMNS = [
   { uid: "Aktivitas", name: "Aktivitas" },
-  { uid: "waktu_aktivitas", name: "waktu_aktivitas" },
+  { uid: "waktu_aktivitas", name: "Waktu Aktivitas" },
 ];
+
+const formatDateTime = (dateStr) => {
+  if (!dateStr) return "-";
+  return new Intl.DateTimeFormat("id-ID", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(new Date(dateStr));
+};
 
 const Aktivitas = () => {
   const {
@@ -65,7 +73,7 @@ const Aktivitas = () => {
       case "waktu_aktivitas":
         return (
           <p className="text-gray-800 text-sm line-clamp-2 max-w-xs">
-            {item.waktu_aktivitas || "-"}
+            {formatDateTime(item.waktu_aktivitas)}
           </p>
         );
 
@@ -82,12 +90,12 @@ const Aktivitas = () => {
       </div>
 
       <DataTable
-        title="Daftar Area Parkir"
+        title="Log Aktivitas"
         icon={Layers}
         // buttonLabel="Tambah Area Parkir"
         onClickButton={() => addModalRef.current?.open()}
         searchValue={searchInputValue}
-        searchPlaceholder="Cari Tarif Parkir..."
+        searchPlaceholder="Cari aktivitas..."
         onSearchChange={handleSearch}
         onClearSearch={handleClearSearch}
         columns={COLUMNS}

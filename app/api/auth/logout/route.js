@@ -15,12 +15,14 @@ export async function POST(req) {
       where: { id_user: id },
     });
 
-    console.log("user", user);
+    const now = new Date();
+    const wibOffset = 7 * 60 * 60 * 1000; // UTC+7
+    const wibDate = new Date(now.getTime() + wibOffset);
 
     await prisma.tb_log_aktivitas.create({
       data: {
         aktivitas: `User Bernama ${user.nama_lengkap} Telah Logout`,
-        waktu_aktivitas: new Date(),
+        waktu_aktivitas: wibDate,
         id_user: user.id_user,
       },
     });

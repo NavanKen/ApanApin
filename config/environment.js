@@ -4,6 +4,7 @@ const environment = {
   db_password: process.env.DATABASE_PASSWORD,
   db_database: process.env.DATABASE_NAME,
   API_URL: process.env.NEXT_PUBLIC_API_URL,
+  AUTH_SECRET: process.env.AUTH_SECRET,
 };
 
 export default environment;

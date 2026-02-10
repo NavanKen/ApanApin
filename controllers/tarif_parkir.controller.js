@@ -2,7 +2,6 @@ import { prisma } from "@/lib/prisma/prisma";
 import response from "@/lib/response";
 import { tarifParkirSchema, tarifPerjam } from "@/lib/validations/tarif.schema";
 import { validateRequest } from "@/lib/validations/validaterequest";
-import { float32 } from "zod";
 
 const TarifParkirController = {
   async create({ jenis_kendaraan, tarif_per_jam }) {
@@ -32,14 +31,14 @@ const TarifParkirController = {
     try {
       const where = search
         ? {
-            OR: [
-              {
-                tarif_per_jam: {
-                  contains: search,
-                },
+          OR: [
+            {
+              jenis_kendaraan: {
+                equals: search,
               },
-            ],
-          }
+            },
+          ],
+        }
         : {};
 
       const [data, total] = await Promise.all([

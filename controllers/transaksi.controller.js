@@ -231,14 +231,15 @@ const TransaksiController = {
             const waktuKeluar = new Date();
             const waktuMasuk = new Date(existing.waktu_masuk);
             const diffMs = waktuKeluar - waktuMasuk;
-            const durasiJam = Math.max(1, Math.ceil(diffMs / (1000 * 60 * 60)));
-            const biayaTotal = durasiJam * Number(existing.tarif.tarif_per_jam);
+            const durasiMenit = Math.max(1, Math.ceil(diffMs / (1000 * 60))); // durasi dalam menit
+            const durasiJamBilling = Math.max(1, Math.ceil(diffMs / (1000 * 60 * 60))); // untuk billing, dibulatkan ke atas per jam
+            const biayaTotal = durasiJamBilling * Number(existing.tarif.tarif_per_jam);
 
             const transaksi = await prisma.tb_transaksi.update({
                 where: { id_parkir: Number(id) },
                 data: {
                     waktu_keluar: waktuKeluar,
-                    durasi_jam: durasiJam,
+                    durasi_jam: durasiMenit,
                     biaya_total: biayaTotal,
                     status: "keluar",
                 },

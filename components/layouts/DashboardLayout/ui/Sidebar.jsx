@@ -30,20 +30,7 @@ const Sidebar = ({ sidebarItems = [], isOpen, onClose, role }) => {
     router.push("/login");
   };
 
-  const getRole = (role) => {
-    switch (role) {
-      case "admin":
-        return "PANEL ADMIN";
-      case "siswa":
-        return "PANEL SISWA";
-      case "orang_tua":
-        return "PANEL ORANG TUA";
-      case "kepala_sekolah":
-        return "PANEL SEKOLAH";
-      default:
-        return "PANEL ADMIN";
-    }
-  };
+
 
   const isActive = (href) => {
     if (
@@ -80,7 +67,6 @@ const Sidebar = ({ sidebarItems = [], isOpen, onClose, role }) => {
               <span className="font-bold text-gray-800 text-base tracking-tight">
                 PARKIR
               </span>
-              <span className="text-xs text-gray-400">{getRole(role)}</span>
             </div>
           </div>
         </div>

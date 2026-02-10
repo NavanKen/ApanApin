@@ -68,6 +68,15 @@ const formatCurrency = (value) => {
     }).format(value || 0);
 };
 
+const formatDurasi = (menit) => {
+    if (!menit || menit <= 0) return "-";
+    const jam = Math.floor(menit / 60);
+    const sisaMenit = menit % 60;
+    if (jam === 0) return `${sisaMenit} Menit`;
+    if (sisaMenit === 0) return `${jam} Jam`;
+    return `${jam} Jam ${sisaMenit} Menit`;
+};
+
 const Transaksi = () => {
     const {
         currentPage,
@@ -178,8 +187,8 @@ const Transaksi = () => {
                             </p>
                             {item.status === "keluar" && (
                                 <p className="text-xs text-gray-400">
-                                    {item.durasi_jam} jam ×{" "}
-                                    {formatCurrency(item.tarif?.tarif_per_jam)}
+                                    {formatDurasi(item.durasi_jam)} ×{" "}
+                                    {formatCurrency(item.tarif?.tarif_per_jam)}/jam
                                 </p>
                             )}
                         </div>
