@@ -14,6 +14,7 @@ import {
   CarFront,
   Tag,
   Activity,
+  Receipt,
 } from "lucide-react";
 
 export const SIDEBAR_ADMIN = [
@@ -60,13 +61,6 @@ export const SIDEBAR_ADMIN = [
     href: "/admin/aktifitas",
     icon: Activity,
   },
-  // {
-  //   key: "riwayat",
-  //   label: "Riwayat Pengaduan",
-  //   description: "Lihat status pengaduan",
-  //   href: "/siswa/riwayat",
-  //   icon: MessagesSquare,
-  // },
 ];
 
 export const SIDEBAR_OWNER = [
@@ -74,22 +68,15 @@ export const SIDEBAR_OWNER = [
     key: "dashboard",
     label: "Dashboard",
     description: "Ringkasan sistem",
-    href: "/orang-tua",
+    href: "/owner",
     icon: LayoutDashboard,
   },
   {
-    key: "kritik-saran",
-    label: "Kritik & Saran",
-    description: "Kirim masukan",
-    href: "/orang-tua/kritik-saran",
-    icon: MessageSquareText,
-  },
-  {
-    key: "pengaturan",
-    label: "Pengaturan Akun",
-    description: "Konfigurasi Akun",
-    href: "/orang-tua/pengaturan",
-    icon: Settings,
+    key: "rekap-transaksi",
+    label: "Rekap Transaksi",
+    description: "Lihat rekap transaksi",
+    href: "/owner/rekap-transaksi",
+    icon: ClipboardList,
   },
 ];
 
@@ -98,7 +85,14 @@ export const SIDEBAR_PETUGAS = [
     key: "dashboard",
     label: "Dashboard",
     description: "Ringkasan sistem",
-    href: "/kepala-sekolah",
+    href: "/petugas",
     icon: LayoutDashboard,
+  },
+  {
+    key: "transaksi",
+    label: "Transaksi",
+    description: "Kelola transaksi parkir",
+    href: "/petugas/transaksi",
+    icon: Receipt,
   },
 ];

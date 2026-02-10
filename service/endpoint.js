@@ -7,6 +7,7 @@ const endpoint = {
   AREA_PARKIR: "/admin/area_parkir",
   TARIF_PARKIR: "/admin/tarif_parkir",
   KENDARAAN: "/admin/kendaraan",
+  TRANSAKSI: "/transaksi",
 };
 
 export default endpoint;

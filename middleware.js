@@ -47,7 +47,24 @@ export async function middleware(request) {
     return NextResponse.next();
   }
 
-  if (pathname.startsWith("/api/admin")) {
+  // if (pathname.startsWith("/api/admin")) {
+  //   if (!token) {
+  //     return NextResponse.json(
+  //       { success: false, error: "Silakan login terlebih dahulu" },
+  //       { status: 401 },
+  //     );
+  //   }
+
+  //   if (token.role !== "admin" && token.role !== "owner") {
+  //     return NextResponse.json(
+  //       { success: false, error: "Anda tidak memiliki akses" },
+  //       { status: 403 },
+  //     );
+  //   }
+  //   return NextResponse.next();
+  // }
+
+  if (pathname.startsWith("/api/transaksi")) {
     if (!token) {
       return NextResponse.json(
         { success: false, error: "Silakan login terlebih dahulu" },
@@ -55,12 +72,21 @@ export async function middleware(request) {
       );
     }
 
-    if (token.role !== "admin") {
+    if (token.role !== "petugas" && token.role !== "owner") {
       return NextResponse.json(
         { success: false, error: "Anda tidak memiliki akses" },
         { status: 403 },
       );
     }
+
+    // Owner only allowed GET
+    if (token.role === "owner" && request.method !== "GET") {
+      return NextResponse.json(
+        { success: false, error: "Owner hanya dapat melihat data" },
+        { status: 403 },
+      );
+    }
+
     return NextResponse.next();
   }
 
@@ -68,5 +94,12 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/auth/:path*", "/api/admin/:path*"],
+  matcher: [
+    "/admin/:path*",
+    "/auth/:path*",
+    "/api/admin/:path*",
+    "/api/transaksi/:path*",
+    "/petugas/:path*",
+    "/owner/:path*",
+  ],
 };

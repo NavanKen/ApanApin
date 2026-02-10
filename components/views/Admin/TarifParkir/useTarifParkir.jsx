@@ -65,7 +65,7 @@ const useTarifParkir = () => {
     isRefetching: isRefetchingAreaParkir,
     refetch: refetchAreaParkir,
   } = useQuery({
-    queryKey: ["User", currentPage, currentLimit, currentSearch],
+    queryKey: ["TarifParkir", currentPage, currentLimit, currentSearch],
     queryFn: getTarifParkir,
     enabled: !!currentPage && !!currentLimit,
   });

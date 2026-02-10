@@ -65,7 +65,7 @@ const useKendaraan = () => {
     isRefetching: isRefetchingKendaraan,
     refetch: refetchKendaraan,
   } = useQuery({
-    queryKey: ["User", currentPage, currentLimit, currentSearch],
+    queryKey: ["Kendaraan", currentPage, currentLimit, currentSearch],
     queryFn: getKendaraan,
     enabled: !!currentPage && !!currentLimit,
   });

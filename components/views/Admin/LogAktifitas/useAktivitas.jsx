@@ -65,7 +65,7 @@ const useAktivitas = () => {
     isRefetching: isRefetchingAreaParkir,
     refetch: refetchAreaParkir,
   } = useQuery({
-    queryKey: ["User", currentPage, currentLimit, currentSearch],
+    queryKey: ["LogAktifitas", currentPage, currentLimit, currentSearch],
     queryFn: getAuthAktivity,
     enabled: !!currentPage && !!currentLimit,
   });

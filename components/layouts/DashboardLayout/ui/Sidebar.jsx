@@ -26,7 +26,7 @@ const Sidebar = ({ sidebarItems = [], isOpen, onClose, role }) => {
 
   const handleLogout = async () => {
     await AuthService.signOutActivity();
-    await signOut();
+    await signOut({ redirect: false });
     router.push("/login");
   };
 
@@ -48,9 +48,8 @@ const Sidebar = ({ sidebarItems = [], isOpen, onClose, role }) => {
   const isActive = (href) => {
     if (
       href === "/admin" ||
-      href === "/siswa" ||
-      href === "/orang-tua" ||
-      href === "/kepala-sekolah"
+      href === "/petugas" ||
+      href === "/owner"
     ) {
       return pathname === href;
     }

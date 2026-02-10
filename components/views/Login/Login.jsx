@@ -31,16 +31,6 @@ const LoginPage = () => {
           Parkir
         </h1>
 
-        <p className="text-zinc-400 text-center mb-10">
-          Tidak punya akun?{" "}
-          <Link
-            href="/register"
-            className="text-black underline underline-offset-4 hover:no-underline transition-all"
-          >
-            Register
-          </Link>
-        </p>
-
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div>
             <label className="text-black text-sm font-medium block mb-2.5">
