@@ -1,0 +1,119 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum RoleUser {
+  admin
+  petugas
+  owner
+}
+
+enum JenisKendaraan {
+  motor
+  mobil
+  lainnya
+}
+
+enum StatusParkir {
+  masuk
+  keluar
+}
+
+
+model kategori {
+  id_kategori   Int     @id @default(autoincrement())
+  nama_kategori String  @db.VarChar(45)
+  deskripsi     String? @db.Text
+  image         String?
+}
+
+
+model tb_user {
+  id_user       Int       @id @default(autoincrement())
+  nama_lengkap  String    @db.VarChar(50)
+  username      String    @unique @db.VarChar(50)
+  password      String    @db.VarChar(100)
+  role          RoleUser
+  status_aktif  Boolean   @default(true)
+
+  // kendaraan     tb_kendaraan[]
+  transaksi     tb_transaksi[]
+  logAktivitas  tb_log_aktivitas[]
+}
+
+model tb_kendaraan {
+  id_kendaraan    Int      @id @default(autoincrement())
+  plat_nomor      String   @db.VarChar(15)
+  // jenis_kendaraan String   @db.VarChar(20)
+  jenis_kendaraan JenisKendaraan
+  warna           String   @db.VarChar(20)
+  pemilik         String   @db.VarChar(100)
+
+  id_user         Int?
+  // user            tb_user @relation(fields: [id_user], references: [id_user])
+
+  transaksi       tb_transaksi[]
+}
+
+model tb_tarif {
+  id_tarif        Int            @id @default(autoincrement())
+  jenis_kendaraan JenisKendaraan
+  tarif_per_jam   Decimal        @db.Decimal(10, 0)
+
+  transaksi       tb_transaksi[]
+}
+
+model tb_area_parkir {
+  id_area    Int    @id @default(autoincrement())
+  nama_area  String @db.VarChar(50)
+  kapasitas  Int
+  terisi     Int?
+
+  transaksi  tb_transaksi[]
+}
+
+model tb_transaksi {
+  id_parkir    Int       @id @default(autoincrement())
+
+  id_kendaraan Int
+  kendaraan    tb_kendaraan @relation(fields: [id_kendaraan], references: [id_kendaraan])
+
+  waktu_masuk  DateTime
+  waktu_keluar DateTime?
+
+  id_tarif     Int
+  tarif        tb_tarif @relation(fields: [id_tarif], references: [id_tarif])
+
+  durasi_jam   Int
+  biaya_total  Decimal   @db.Decimal(10, 0)
+
+  status       StatusParkir
+
+  id_user      Int
+  user         tb_user @relation(fields: [id_user], references: [id_user])
+
+  id_area      Int
+  area         tb_area_parkir @relation(fields: [id_area], references: [id_area])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model tb_log_aktivitas {
+  id_log          Int      @id @default(autoincrement())
+  aktivitas       String   @db.VarChar(100)
+  waktu_aktivitas DateTime
+
+  id_user         Int
+  user            tb_user @relation(fields: [id_user], references: [id_user])
+}
+
